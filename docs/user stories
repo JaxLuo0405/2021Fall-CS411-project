@@ -1,0 +1,13 @@
+Log In (Music App)
+1.
+I am a traveller who travels around Switzerland. When driving in the sunny days with mountains and forests around, I hope to open my spotify to listen to some music related to the environment. Therefore I open the APP of (  ) and type in my mood, which is relaxation, and  the current weather,which is runny. The app will automatically generate a list of songs belonging to artists from this city and suitable for sunny weather. Apparently it is fabulous for the people like me who have difficulty making a choice, which the app will choose the songs for me. 
+2.
+User decides they want to make a playlist for a rainy day in Chicago. They visit our application website, and click to create a new account. The login dialogue prompts the user to sign in with their spotify account. If their spotify account is invalid, or they do not have one, a dialogue appears which offers the user the option to either try to log in again, or direct them to the option to make a free account. 
+If the spotify account used to log in is valid, then the user answers a series of profile questions, including their home location, and some top genres that they listen to. 
+
+3. 
+Upon logging in the user is prompted with the question of how long they want the playlist to be. The user can put in either amount of songs, or length. The generated playlist should not exceed the amount of songs or length entered. If the user puts in an invalid number of songs or length (such as a negative amount) the app will prompt the user to enter a valid amount.
+
+
+
+4. After the user type in the attributes they want for the playlist, the app will first search previous generated playlists to detect if there are any playlist with similar attributes already in the database. This is based upon a similarity check function and any playlist with good similarity will be shown up under the search result in the app. So that the user may pick such playlist, which also decreases the use of the app’s algorithm. 

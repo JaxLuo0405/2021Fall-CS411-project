@@ -35,4 +35,5 @@ User Story 4: Users interacting with other users
 This user story assumes that the user is logged in and has set up their profile (User Story 1). On our application website users can view a 
 library of archived playlists that the system has previously created (if any). Since the web app is connected to spotify you can access your 
 friends libraries of their archived playlists by going on their profile. Users can also access public profiles, such as musicians on tour, and 
-view their libraries of archived playlists.
+view their libraries of archived playlists. To keep track of your favorite artists generated playlists you can follow them on our web application 
+and choose to get notifications via email when they create a new playlist. 

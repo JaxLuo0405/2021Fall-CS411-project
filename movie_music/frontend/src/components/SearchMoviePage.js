@@ -15,10 +15,8 @@ export default class SearchMoviePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            movie_title: "",
-            spotifyAuthenticated: false,
+            movie_title: ""
         };
-        this.authenticateSpotify = this.authenticateSpotify.bind(this);
         this.handleSearchButtonPressed = this.handleSearchButtonPressed.bind(this);
         this.handleMovieTitleChange = this.handleMovieTitleChange.bind(this);
     }
@@ -30,38 +28,19 @@ export default class SearchMoviePage extends Component {
     }
 
     handleSearchButtonPressed(){
-        this.authenticateSpotify()
-        is_authenticated = is_spotify_authenticated(self.request.session.session_key)
-        if (is_authenticated) {
-            const requestOptions = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    movie_title: this.state.movieTitle
-                }),
-            };
-            fetch('/api/search-movie', requestOptions)
-                .then((response) => response.json())
-                .then((data) => this.props.history.push('generate'));
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                movie_title: this.state.movieTitle
+            }),
+        };
+        fetch('/api/search-movie', requestOptions)
+            .then((response) => response.json())
+            .then((data) => this.props.history.push('/generate'));
         }
-        else {
-        this.authenticateSpotify()
-        }
-    }
+    
 
-    authenticateSpotify() {
-        fetch('/spotify/is-authenticated')
-        .then((response) => response.json())
-        .then((data) => {
-            this.setState({spotifyAuthenticated: data.status})
-            if (!data.status) {
-                fetch('/spotify/get-auth-url').then((response) => response.json())
-                .then((data) => {
-                    window.location.replace(data.url);
-                });
-            }
-        });
-    }
 
     render () {
         return (
@@ -75,8 +54,7 @@ export default class SearchMoviePage extends Component {
                 <FormControl>
                     <TextField 
                     required = {true}
-                     type = "string" 
-                    onChange={this.handleMovieTitleChange}/>
+                     type = "string" />
                         <FormHelperText>
                             <div align = "center">
                                 Movie Title
@@ -88,7 +66,9 @@ export default class SearchMoviePage extends Component {
                 <Button 
                     color = "primary" 
                     variant = "contained" 
-                    onClick = {this.handleSearchButtonPressed}> 
+                    onClick = {this.handleSearchButtonPressed, this.handleMovieTitleChange}
+                    to = "/generate"
+                    component = { Link }> 
                     Search 
                 </Button>
             </Grid>

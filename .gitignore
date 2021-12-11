@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+bin/
 develop-eggs/
 dist/
 downloads/
@@ -128,5 +129,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-movie_music/frontend/node_modules/
+# Node stuff:
 node_modules/

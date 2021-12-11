@@ -5,6 +5,7 @@ from .models import MovieToPlaylist
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .creds import OMDB_KEY, OMDB_URL
+import requests
 
 
 # session connection between two computers
@@ -17,18 +18,24 @@ class Generate(APIView):
     # get method call from API?
     serializer_class = MovieToPlaylistSerializer
 
+    def get(self,APIView):
+        title = SearchMovieView.movie
+        req = f'{OMDB_URL}&apikey={OMDB_KEY}'
+        # response = 
     # def get(self, APIView):
     #     movies = MovieToPlaylist.objects.all()
-    # def post(self, request):
-    #     movie_title = request.POST.get('movie_title')
-    #     api_key = OMDB_KEY
-    #     url = OMDB_URL
-    #     response = requests.get(url)
+    def post(self, request):
+        movie_title = SearchMovieView.movie_title
+        url = f'{OMDB_URL}&apikey={OMDB_KEY}&t={movie_title}'
+        response = requests.get(url)
+        data = response.json()
+        return data['Title'], data['Plot']
 
 class SearchMovieView(APIView):
     serializer_class = SearchMovieSerializer
 
     def post(self, request, format=None):
+        print("hola")
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
 

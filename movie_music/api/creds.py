@@ -1,2 +1,2 @@
-OMDB_URL = 'http://www.omdapi.com/'
-OMDB_KEY = 'f9965e56'
+OMDB_URL = 'http://www.omdbapi.com/?i=tt3896198&'
+OMDB_KEY = '931180e3'

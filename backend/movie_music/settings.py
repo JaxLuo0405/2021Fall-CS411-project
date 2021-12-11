@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'spotify.apps.SpotifyConfig',
     'corsheaders',
-    'api.apps.ApiConfig'
 ]
     # 'frontend.apps.FrontendConfig',
 

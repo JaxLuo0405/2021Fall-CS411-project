@@ -7,58 +7,53 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import { Link, useSearchParams } from "react-router-dom";
 
-export default function SearchMoviePage({ url }) {
-    const [spotifyAuthenticated, setSpotifyAuthenticated] = useState(false);
+export default function SearchMoviePage({ }) {
     const [movieTitle, setMovieTitle] = useState("");
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [searchParams, setSearchParams] = useSearchParams();
 
-    useEffect(() => {
-        alert(searchParams.get('code'))
-      }, [searchParams]); // Only re-run the effect if count changes
+    // useEffect(() => {
+    //     alert(searchParams.get('code'))
+    //   }, [searchParams]); // Only re-run the effect if count changes
 
     function handleMovieTitleChange(event) {
         setMovieTitle(event.target.value);
     }
 
     async function isSpotifyAuthenticated() {
-        return fetch('http://localhost:8000/spotify/is-authenticated')
-        .then((response) => response.json());
+        // return fetch('http://localhost:8000/spotify/is-authenticated')
+        // .then((response) => response.json());
     }
 
     async function authenticateSpotify() {
-        return isSpotifyAuthenticated()
-        .then((data) => {
-            setSpotifyAuthenticated(data.status);
-            if (!data.status) {
-                fetch('http://localhost:8000/spotify/get-auth-url')
-                .then((response) => response.json())
-                .then((data)=> {
-                    window.location.replace(data.url);
-                    authenticateSpotify();
-                });                
-            }
-        })
+        // return isSpotifyAuthenticated()
+        // .then((data) => {
+        //     setSpotifyAuthenticated(data.status);
+        //     if (!data.status) {
+        //         fetch('http://localhost:8000/spotify/get-auth-url')
+        //         .then((response) => response.json())
+        //         .then((data)=> {
+        //             window.location.replace(data.url);
+        //             authenticateSpotify();
+        //         });                
+        //     }
+        // })
     }
 
 
     async function handleSearchButtonPressed(event) {
         // is_authenticated = is_spotify_authenticated(self.request.session.session_key)
-        if (!spotifyAuthenticated) {
-            alert("hello!");
-            return authenticateSpotify().then(() => alert("whew"));
-        } else {
-            alert('authenticated else')
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    movie_title: this.state.movieTitle
-                }),
-            };
-            fetch('/api/search-movie', requestOptions)
-                .then((response) => response.json())
-                .then((data) => this.props.history.push('generate'));
-        }
+        alert('authenticated else')
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                movie_title: this.state.movieTitle
+            }),
+        };
+        fetch('/api/search-movie', requestOptions)
+            .then((response) => response.json())
+            .then((data) => this.props.history.push('generate'));
+
     }
 
     // async function handleSpotifyAuthenticated(event) {
@@ -78,7 +73,7 @@ export default function SearchMoviePage({ url }) {
             <Grid item xs={12} align="center">
 
                 <Typography component="h4" variant="h4">
-                    Search a movie; authenticated : {JSON.stringify(spotifyAuthenticated)}
+                    Search a movie
                 </Typography>
             </Grid>
             <Grid item xs={12} align="center">

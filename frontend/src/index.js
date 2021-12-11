@@ -3,20 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import SearchMoviePage from './components/SearchMoviePage';
-import MovieToPlaylist from './components/MovieToPlaylist';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CssBaseline from '@mui/material/CssBaseline';
+
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="search" element={<SearchMoviePage />} />
-      {/* <Route path="search" element={<MovieToPlaylist />} /> */}
-      <Route path="generate" element={<MovieToPlaylist />} /> 
-    </Routes>
-  </BrowserRouter>
+    <CssBaseline />
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from .util import execute_spotify_api_request, get_user_tokens, update_or_create_user_token, is_spotify_authenticated
 from api.models import MovieToPlaylist
+from django.http import HttpResponseRedirect
 
 
 class AuthURL(APIView):
@@ -22,35 +23,47 @@ class AuthURL(APIView):
 
         return Response({'url': url}, status = status.HTTP_200_OK)
 
-def spotify_callback(request, format= None):
-    code = request.GET.get('code') # used to authenicate user
-    error = request.GET.get('error')
+class SpotifyCallback(APIView):
+    def get(self, request, format= None):
+        code = request.GET.get('code') # used to authenicate user
+        error = request.GET.get('error')
+        if(code is None): 
+            return Response({'error': "please provide a fuckin code"})
+        
+        print(code)
+        response = post('https://accounts.spotify.com/api/token', data= {
+            'grant_type': 'authorization_code',
+            'code': code,
+            'redirect_uri': REDIRECT_URI,
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET
+        }).json()
+        error = response.get('error')
+        if(error is not None):
+            return Response({'error': error, 'errorDescription': response.get("error_description")})
+        access_token = response.get('access_token')
+        token_type = response.get('token_type')
+        refresh_token = response.get('refresh_token')
+        expires_in = response.get('expires_in')
+        
+        print("🤘 ", request.session.session_key)
 
-    response = post('https://accounts.spotify.com/api/token', data= {
-        'grant_type': 'authorization_code',
-        'code': code,
-        'redirect_uri': REDIRECT_URI,
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET
-    }).json()
-
-    access_token = response.get('access_token')
-    token_type = response.get('token_type')
-    refresh_token = response.get('refresh_token')
-    expires_in = response.get('expires_in')
-    error = response.get('error')
-    
-    if not request.session.exists(request.session.session_key):
-        request.session.create()
-
-    update_or_create_user_token(
-        request.session.session_key, access_token, token_type, expires_in, refresh_token)
-
-    return redirect('frontend:')
+        # if not request.session.exists(request.session.session_key):
+            # print('🤪 areguvijezs')
+            # request.session.create()
+        if not request.session.session_key:
+            request.session.save()
+        else:
+            print('🥵 im having a stroke')
+        print(request.session.session_key)
+        update_or_create_user_token(
+            request.session.session_key, access_token, token_type, expires_in, refresh_token)
+        
+        return Response({'success': 'you did it'})
 
 class IsAuthenticated(APIView):
     def get(self, request, format= None):
-        is_authenticated = is_spotify_authenticated(self.request.session.session_key)
+        is_authenticated = is_spotify_authenticated(request.session.session_key)
         return Response({'status': is_authenticated}, status = status.HTTP_200_OK)
 
 class FindPlaylist(APIView):

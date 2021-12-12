@@ -25,8 +25,8 @@ class Generate(APIView):
     # def get(self, APIView):
     #     movies = MovieToPlaylist.objects.all()
     def post(self, request):
-        movie_title = SearchMovieView.movie_title
-        url = f'{OMDB_URL}&apikey={OMDB_KEY}&t={movie_title}'
+        movie_title = SearchMovieView.Title
+        url = f'{OMDB_URL}?t={movie_title}&type=movie&apikey={OMDB_KEY}'
         response = requests.get(url)
         data = response.json()
         return data['Title'], data['Plot']
@@ -41,16 +41,16 @@ class SearchMovieView(APIView):
 
         serializer = self.serializer_class(data= request.data) 
         if serializer.is_valid():
-            movie_title = serializer.data.get('data.movie_title')
+            movie_title = serializer.data.get('data.Title')
             host = self.request.session.session_key
             queryset = MovieToPlaylist.objects.filter(host = host)
             if queryset.exists():
                 movieToPlaylist = queryset[0]
-                movieToPlaylist.movie_title = movie_title
-                movieToPlaylist.save(update_fields=['movie_title'])
+                movieToPlaylist.Title = Title
+                movieToPlaylist.save(update_fields=['Title'])
                 return Response(MovieToPlaylistSerializer(movieToPlaylist).data, status=status.HTTP_200_OK)
             else:
-                movieToPlaylist = MovieToPlaylist(movie_title = movie_title),
+                movieToPlaylist = MovieToPlaylist(Title = Title),
                 movieToPlaylist.save()
                 return Response(MovieToPlaylistSerializer(movieToPlaylist).data, status=status.HTTP_201_CREATED)
             return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)           

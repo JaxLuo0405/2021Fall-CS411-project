@@ -4,35 +4,50 @@ export default class MovieToPlaylist extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            movie_title: "",
-            description: "",
-            genre: "",
+            Plot: "",
+            Genre: "",
         };
         
         this.getDetails();
     }
-    // gets details
+    // gets movie details
     getDetails() {
-        fetch('/api/generate').then((response) => 
-            response.json()
-        ).then((data) => {
+        fetch('api/search-movie')
+        .then((response) => {
+            if (!response.ok) {
+                return {}
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then((data) => {
             this.setState ({
-                movie_title: data.movie_title,
-                description: data.description,
-                genre: data.genre,
+                Title: data.Title,
+                Plot: data.Plot,
+                Genre: data.Genre,
+                Poster: data.Poster
             });
+            console.log(data);
         });
-        
     }
 
 
     render() {
         return (
-        <div>
-            <p> Name: {this.state.movieTitle} </p>
-            <p> Description: </p>
-        </div>
-        );
+            <Grid container spacing={1}>
+            <Grid item xs={12} align ="center"> 
+                <Typography component = "h4" variant = "h4">
+                    Name: {this.state.Title}
+                </Typography>
+            </Grid> 
+            <Grid item xs={12} align ="center"> 
+                <Button color = "secondary" variant = "contained" to = "/search" component = {Link}> 
+                     Search another movie!
+                </Button>
+            </Grid>
+        </Grid>
+        )
     }
 }
 

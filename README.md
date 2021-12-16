@@ -31,6 +31,7 @@ Our prototype code can be found in [./prototype](./prototype)
 As required by this assignment, our docs folder is in [./docs](./docs)
 
 In there, you may find:
+- [.doc/Viedo_Presentation.mp4](.docs/Video_Presentation.mp4)
 - [./docs/pitches.md](./docs/pitches.md)
 - [./docs/tech_stack.md](./docs/tech_stack.md)
 - [./docs/user_stories.md](./docs/user_stories.md)

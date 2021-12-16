@@ -12,7 +12,7 @@ export default class MovieToPlaylist extends Component {
     }
     // gets movie details
     getDetails() {
-        fetch('api/search-movie')
+        fetch('api/find-movie')
         .then((response) => {
             if (!response.ok) {
                 return {}

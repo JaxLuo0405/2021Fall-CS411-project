@@ -54,7 +54,8 @@ export default class SearchMoviePage extends Component {
                 <FormControl>
                     <TextField 
                     required = {true}
-                     type = "string" />
+                     type = "string" 
+                     onChange = this.handleMovieTitleChange/>
                         <FormHelperText>
                             <div align = "center">
                                 Movie Title
@@ -66,8 +67,7 @@ export default class SearchMoviePage extends Component {
                 <Button 
                     color = "primary" 
                     variant = "contained" 
-                    onClick = {this.handleSearchButtonPressed, this.handleMovieTitleChange}
-                    to = "/generate"
+                    onClick = this.handleSearchButtonPressed
                     component = { Link }> 
                     Search 
                 </Button>

@@ -34,4 +34,4 @@ In there, you may find:
 - [./docs/pitches.md](./docs/pitches.md)
 - [./docs/tech_stack.md](./docs/tech_stack.md)
 - [./docs/user_stories.md](./docs/user_stories.md)
-- [./docs/demonstratePrototype.mp4](./docs/demonstratePrototype.mp4)
+- [./docs/demonstrate.mp4](./docs/demonstrate.mp4)

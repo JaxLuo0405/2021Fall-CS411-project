@@ -7,6 +7,14 @@ option to make a free Spotify account (the non-premium Spotify accounts using fa
 account they can simply sign up with an email address). If the spotify account used to log in is valid, then the user answers a 
 series of profile questions, including their home location, and some top genres that they listen to.
 
+REVISION: Login
+
+User decides they want to find details of a specific movie. They visit our application website, and click on Login with Spotify. 
+The login will redirect them to the Spotify login page and login with their Spotify account. If their spotify is invalid, or do they not have
+one, they must create one before using our web app. Once they login they will be redirected to the homepage and be able to begin.
+Users are authenticated for an hour. After an hour expires when a user wants to visit our website they must be authenticated by Spotify again.
+Had to change and simplify plan.
+
 User Story 2: Create a playlist
 
 This user story assumes that the user is logged in and has set up their profile (User Story 1). Upon logging in the user is 
@@ -19,6 +27,12 @@ in the attributes they want for the playlist, the app will first search previous
 playlist with similar attributes already in the database. If there are, the user is offered these similar playlists in a “you may 
 also like these” window. The generated playlist will be displayed with the name “x days in y” where x is the current weather such as 
 ‘sunny’ or ‘rainy,’ and y is the city such as ‘Boston.’ The created playlist is automatically added to the user’s spotify playlist. 
+
+REVISION: Search a movie
+
+The user will search a movie and press 'Search' which will redirect them to our generate page which displays the information of the movie 
+they requested. Users can go back to the Search page by pressing 'Search another movie' button. Had to change and simplify plan.
+
 
 User Story 3: Users interact with playlist
 
